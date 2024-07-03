@@ -1,5 +1,8 @@
 const prompt = require('prompt-sync')();
 
+function principal(){
+
+
 while(true){
 menu()   
 let operacao = prompt('Digite a operação: ').toLowerCase();
@@ -12,12 +15,17 @@ if (operacao === "sair"){
 let num1 = +prompt("Digite o primeiro número para realizar a conta: ")
 let num2 = +prompt("Digite o segundo número para realizar a conta: ")
 
+num1 = parseFloat(num1)
+num2 = parseFloat(num2)
+
 
 if (isNaN(num1) || isNaN(num2)){
   console.log("Digite um número válido")
   continue;
 }
+
 let resposta = 0;
+
    switch (operacao) {
         case "soma":
         case "adicao":
@@ -50,12 +58,28 @@ let resposta = 0;
          menu()
          break;
     }
-    let continuar = prompt("Deseja realizar outra operaçao? (s/n)").toLocaleLowerCase();
-    if (continuar !== 's'){
-        console.log("Saindo do programa...")
-        break;
-    } 
+ let continuar = paraContinuar()
+ if (continuar !== "s"){
+    console.log("Saindo do programa...")
+    break;
+ }
+ }
 }
+function paraContinuar(){
+    let continuar
+    while(true){
+        continuar = prompt("Deseja realizar outra operaçao? (s/n)").toLocaleLowerCase();
+        if (continuar === 's' || continuar === "n" ){
+            break;
+        }  else {
+            console.log("Por favor, digite 's' para continuar  ou 'n' para encerrar o programa")
+        }
+
+    } 
+    return continuar;
+   
+}
+    
 
 
 function menu() {
@@ -67,3 +91,5 @@ function menu() {
     console.log("Porcentagem")
     console.log("'Sair' para  sair do programa")
   }
+
+  principal();
